@@ -369,23 +369,30 @@ namespace PerformReportCSV.Controllers
                     importedfiles.Add(keyword.filename);                                       
                 }
                 //List<String> fileDifference = directoryfiles.Except(importedfiles).ToList();
-
+                
                 List<String> fileDifference = new List<string>();
-                foreach(string directoryfile in directoryfiles)
+                foreach (string directoryfile in directoryfiles)
                 {
-                    foreach(string importedfile in importedfiles)
+                    foreach (string importedfile in importedfiles)
                     {
+                        // Does directoryfile list equal importedfile list, if it does do nothing.
                         if (directoryfile.Equals(importedfile))
                         {
+                            //Do Nothing
+                        }
+                        // Does directoryfile list not equal importedfile list, if it doesn't add the differences to a list
+                        else if (!directoryfile.Equals(importedfile))
+                        {
+                            // fileDifference is getting duplicates when it adds directoryfile entries that are already in fileDifference
+                            // Stop adding those duplicate file entries
+                            if (!fileDifference.Contains(directoryfile))
+                            {
+                                fileDifference.Add(directoryfile);
+                            }
 
                         }
-                        else
-                        {
-                            
-                        }
                     }
-                }
-                
+                } 
                 return fileDifference; //where is this going? It goes to the method that calls this method.
             }            
         }
@@ -424,7 +431,6 @@ namespace PerformReportCSV.Controllers
             PerformanceReports.CSVBatching(filename);
         }
     }
-
     public class DavidsPerformanceReports
     {
         public static String ImportUnimportedFiles(string directory)
