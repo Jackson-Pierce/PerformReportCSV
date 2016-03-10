@@ -22,6 +22,13 @@ namespace PerformReportCSV
             //PerformanceReports.ImportUnimportedFiles(@"C:\Users\hmw\Documents\J.Pierce\JPStarterDesktop\kwreports");
 
         }
+
+        static void Practice031016v1()
+        {
+            //notes:...
+            Console.WriteLine("test");
+
+        }
     }
 }
 

@@ -381,9 +381,9 @@ namespace PerformReportCSV.Controllers
                         {
 
                         }
-                        else if(!directoryfile.Equals(importedfile))
+                        else
                         {
-                            fileDifference.Add(importedfile);
+                            
                         }
                     }
                 }
