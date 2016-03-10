@@ -375,21 +375,20 @@ namespace PerformReportCSV.Controllers
                 {
                     foreach (string importedfile in importedfiles)
                     {
-                        // Does directoryfile list equal importedfile list, if it does do nothing.
+                        // Does the string from the list equal a string from other list
                         if (directoryfile.Equals(importedfile))
                         {
                             //Do Nothing
                         }
-                        // Does directoryfile list not equal importedfile list, if it doesn't add the differences to a list
+                        // Does the string from the list not equal a string from the other list
                         else if (!directoryfile.Equals(importedfile))
                         {
-                            // fileDifference is getting duplicates when it adds directoryfile entries that are already in fileDifference
-                            // Stop adding those duplicate file entries
+                            //Does the list of strings not contain a string from the other list
+                            //if it doesn't contain the string add it to the list
                             if (!fileDifference.Contains(directoryfile))
                             {
                                 fileDifference.Add(directoryfile);
                             }
-
                         }
                     }
                 } 
