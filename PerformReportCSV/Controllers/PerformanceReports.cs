@@ -195,7 +195,6 @@ namespace PerformReportCSV.Controllers
             }//end of using
             File.WriteAllLines(@"C:\Users\hmw\Documents\J.Pierce\JPStarterDesktop\NewCSV\foreach", reports);
         }
-
         /// <summary>
         /// What is this method trying to do?
         /// Import new data from a file, and insert that data into the table.
@@ -344,7 +343,6 @@ namespace PerformReportCSV.Controllers
                 } // end of for loop
             }  //end of using statement     
         }
-
         /// <summary>
         /// This method will return a list of all files in directory that haven't been loaded into JPStarter.dbo.KWPerformanceReports
         /// 1. Create a list of csv file paths from a folder
@@ -391,7 +389,6 @@ namespace PerformReportCSV.Controllers
                 return fileDifference; //where is this going? It goes to the method that calls this method.
             }            
         }
-
         /// <summary>
         /// This method will import all files from directory that haven't been imported
         /// hint: use FilesToBeImported() and CSVBatching()
