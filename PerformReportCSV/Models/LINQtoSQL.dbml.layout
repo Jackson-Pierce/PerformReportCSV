@@ -2,10 +2,10 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="LINQtoSQL">
   <DataContextMoniker Name="/LINQtoSQLDataContext" />
   <nestedChildShapes>
-    <classShape Id="b161b172-b06c-4119-be6d-9de57f708dbb" absoluteBounds="1.875, 1.375, 2, 5.4246240234375">
+    <classShape Id="d92301b3-abe7-4e98-a921-7f60de9ce756" absoluteBounds="4.875, 1, 2, 5.4246240234375">
       <DataClassMoniker Name="/LINQtoSQLDataContext/KWPerformanceReport" />
       <nestedChildShapes>
-        <elementListCompartment Id="a76e567f-7038-4208-a44f-5eec26d8ed43" absoluteBounds="1.8900000000000001, 1.835, 1.9700000000000002, 4.8646240234375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="aafa39d1-00f1-4843-93f8-ae03995ffcca" absoluteBounds="4.89, 1.46, 1.9700000000000002, 4.8646240234375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

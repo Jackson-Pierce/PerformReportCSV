@@ -74,7 +74,7 @@ namespace PerformReportCSV.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.KWPerformanceReports")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="staging.KWPerformanceReports")]
 	public partial class KWPerformanceReport : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		

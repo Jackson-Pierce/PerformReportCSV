@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="JPstarter" Class="LINQtoSQLDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=USER8450MT\SQLEXPRESS;Initial Catalog=JPstarter;Integrated Security=True" SettingsObjectName="PerformReportCSV.Properties.Settings" SettingsPropertyName="JPstarterConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.KWPerformanceReports" Member="KWPerformanceReports">
+  <Table Name="staging.KWPerformanceReports" Member="KWPerformanceReports">
     <Type Name="KWPerformanceReport">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="channel" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />

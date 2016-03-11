@@ -373,7 +373,7 @@ namespace PerformReportCSV.Controllers
                 List<String> fileDifference = new List<string>();
                 foreach (string directoryfile in directoryfiles)
                 {
-                    foreach (string importedfile in importedfiles)
+                    foreach (string importedfile in importedfiles) 
                     {
                         // Does the string from the list equal a string from other list
                         if (directoryfile.Equals(importedfile))
