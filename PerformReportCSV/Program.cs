@@ -15,20 +15,13 @@ namespace PerformReportCSV
         static void Main(string[] args)
         {
             PerformanceReports.Setup();
-            string directory = @"C:\Users\hmw\Documents\J.Pierce\JPStarterDesktop\kwreports";
+            string directory = @"C:\Users\j.pierce\Documents\PerformReportCSV\JPStarterDesktop\kwreports";
             //PerformanceReports.ImportUnimportedFiles(directory);
-            PerformanceReports.ImportUnimportedFiles(directory);           
+            PerformanceReports.ImportUnimportedFiles(directory);
             // PerformanceReports.Setup();
             //PerformanceReports.ImportUnimportedFiles(@"C:\Users\hmw\Documents\J.Pierce\JPStarterDesktop\kwreports");
-
-        }
-
-        static void Practice031016v1()
-        {
-            //notes:...
-            Console.WriteLine("test");
-
         }
     }
 }
+
 

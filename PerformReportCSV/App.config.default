@@ -4,7 +4,10 @@
     </configSections>
     <connectionStrings>
         <add name="PerformReportCSV.Properties.Settings.JPstarterConnectionString"
-            connectionString="Data Source=ATHENA;Initial Catalog=JPstarter;Integrated Security=True"
+            connectionString="Data Source=USER8450MT\SQLEXPRESS;Initial Catalog=JPstarter;Integrated Security=True"
+            providerName="System.Data.SqlClient" />
+        <add name="PerformReportCSV.Properties.Settings.JPStarterConnectionString1"
+            connectionString="Data Source=athena;Initial Catalog=JPStarter;Integrated Security=True"
             providerName="System.Data.SqlClient" />
     </connectionStrings>
     <startup> 

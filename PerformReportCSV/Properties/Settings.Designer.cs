@@ -33,5 +33,15 @@ namespace PerformReportCSV.Properties {
                 return ((string)(this["JPstarterConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=athena;Initial Catalog=JPStarter;Integrated Security=True")]
+        public string JPStarterConnectionString1 {
+            get {
+                return ((string)(this["JPStarterConnectionString1"]));
+            }
+        }
     }
 }

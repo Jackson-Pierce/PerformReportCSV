@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="JPstarter" Class="LINQtoSQLDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=USER8450MT\SQLEXPRESS;Initial Catalog=JPstarter;Integrated Security=True" SettingsObjectName="PerformReportCSV.Properties.Settings" SettingsPropertyName="JPstarterConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="staging.KWPerformanceReports" Member="KWPerformanceReports">
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="JPStarter" Class="LINQtoSQLDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=athena;Initial Catalog=JPStarter;Integrated Security=True" SettingsObjectName="PerformReportCSV.Properties.Settings" SettingsPropertyName="JPStarterConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.KWPerformanceReports" Member="KWPerformanceReports">
     <Type Name="KWPerformanceReport">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="channel" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
@@ -24,6 +24,33 @@
       <Column Name="cost" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="avgposition" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="finalurls" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="importedat" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="filename" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="production.KWPerformanceReports" Member="KWPerformanceReportproductions">
+    <Type Name="KWPerformanceReportproduction">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Day" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CampaignID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Campaign" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Campaignstate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="AdgroupID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Adgroup" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="adgroupstate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="KeywordID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Keyword" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Matchtype" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FirstpageCPC" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Qualityscore" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Maxcpc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Impressions" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SearchImpressionShare" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Clicks" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="AvgCPC" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Cost" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="AVGposition" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="FinalURL" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
       <Column Name="importedat" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="filename" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
     </Type>

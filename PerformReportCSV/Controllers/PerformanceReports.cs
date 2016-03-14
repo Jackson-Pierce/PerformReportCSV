@@ -362,9 +362,9 @@ namespace PerformReportCSV.Controllers
 
             using (LINQtoSQLDataContext db = new LINQtoSQLDataContext())
             {
-                List<KWPerformanceReportStaging> keywords = db.KWPerformanceReportStagings.ToList(); //eager loading
+                List<KWPerformanceReport> keywords = db.KWPerformanceReports.ToList(); //eager loading
                 List<String> importedfiles = new List<string>();
-                foreach (KWPerformanceReportStaging keyword in keywords)
+                foreach (KWPerformanceReport keyword in keywords)
                 {
                     importedfiles.Add(keyword.filename);
                 }
@@ -407,7 +407,7 @@ namespace PerformReportCSV.Controllers
 
             foreach (string filename in filenamesTobeimported)
             {
-                RawCSVBatching(filename);
+                CSVBatching(filename);
             }
             return null;
         }
@@ -420,14 +420,14 @@ namespace PerformReportCSV.Controllers
         /// </summary>
         public static void Setup()
         {
-            string filename = (@"C:\Users\hmw\Documents\J.Pierce\JPStarterDesktop\Rawkwreports\KeywordPerformanceNBS20140101.csv");
+            string filename = (@"C:\Users\j.pierce\Documents\PerformReportCSV\JPStarterDesktop\kwreports\keywordperformancereport20160201.csv");
 
             using (LINQtoSQLDataContext dba = new LINQtoSQLDataContext())
             {
-                dba.ExecuteCommand("TRUNCATE TABLE staging.KWPerformanceReports");
+                dba.ExecuteCommand("TRUNCATE TABLE dbo.KWPerformanceReports");
             }
 
-            PerformanceReports.RawCSVBatching(filename);
+            PerformanceReports.CSVBatching(filename);
         }
         public static void RawCSVBatching(string filename)
         {
@@ -458,7 +458,7 @@ namespace PerformReportCSV.Controllers
                                 bool test = true;
                                 test = !info[0].Equals("Day");
 
-                                KWPerformanceReportStaging keyword = new KWPerformanceReportStaging();
+                                KWPerformanceReportproduction keyword = new KWPerformanceReportproduction();
                                 keyword.Day = info[0];
                                 keyword.CampaignID = info[1];
                                 keyword.Campaign = info[2];
@@ -471,18 +471,18 @@ namespace PerformReportCSV.Controllers
                                 keyword.Matchtype = info[9];
                                 keyword.FirstpageCPC = info[10];
                                 keyword.Qualityscore = info[11];
-                                keyword.Max_cpc = info[12];
+                                keyword.Maxcpc = info[12];
                                 keyword.Impressions = info[13];
-                                keyword.SearchImpr_share = info[14];
+                                keyword.SearchImpressionShare = info[14];
                                 keyword.Clicks = info[15];
-                                keyword.Avg_CPC = info[16];
+                                keyword.AvgCPC = info[16];
                                 keyword.Cost = info[17];
-                                keyword.Avg_position = info[18];
+                                keyword.AVGposition = info[18];
                                 keyword.FinalURL = info[19];
                                 keyword.importedat = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                                 keyword.filename = filename;
 
-                                db.KWPerformanceReportStagings.InsertOnSubmit(keyword);
+                                db.KWPerformanceReportproductions.InsertOnSubmit(keyword);
                             } // end of if statement
                         } // end of foreach loop 
                         db.SubmitChanges();
