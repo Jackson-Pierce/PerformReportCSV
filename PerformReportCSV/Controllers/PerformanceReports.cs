@@ -6,7 +6,7 @@ using PerformReportCSV.Models;
 
 namespace PerformReportCSV.Controllers
 {
-   public class PerformanceReports
+    public class PerformanceReports
     {
         /// <summary>
         /// What does this Method do?
@@ -28,28 +28,28 @@ namespace PerformReportCSV.Controllers
             using (LINQtoSQLDataContext db = new LINQtoSQLDataContext())
             {
                 List<KWPerformanceReport> keywords = db.KWPerformanceReports.ToList();
-                
-                    reports.Add
-                    ("channel," +
-                    "day," +
-                    "campaignid," +
-                    "campaign," +
-                    "campaignState," +
-                    "matchType," +
-                    "firstpagecpc," +
-                    "qualityscore," +
-                    "maxcpc," +
-                    "impressions," +
-                    "searchimpressionshare," +
-                    "clicks," +
-                    "avgcpc," +
-                    "cost," +
-                    "avgposition," +
-                    "finalurls," +
-                    "importedat," +
-                    "filename"
-                    );
-                
+
+                reports.Add
+                ("channel," +
+                "day," +
+                "campaignid," +
+                "campaign," +
+                "campaignState," +
+                "matchType," +
+                "firstpagecpc," +
+                "qualityscore," +
+                "maxcpc," +
+                "impressions," +
+                "searchimpressionshare," +
+                "clicks," +
+                "avgcpc," +
+                "cost," +
+                "avgposition," +
+                "finalurls," +
+                "importedat," +
+                "filename"
+                );
+
                 foreach (KWPerformanceReport keyword in keywords)
                 {
                     var arr1 = new List<String>
@@ -211,14 +211,14 @@ namespace PerformReportCSV.Controllers
         /// 5e. Insert the Class variables to KWPerformanceReport class.
         /// </summary>
         public static void CSVImporteachloop(string filename)
-        {            
+        {
             using (LINQtoSQLDataContext db = new LINQtoSQLDataContext())
             {
                 List<string> allLinesText = File.ReadAllLines(filename).ToList();
 
                 foreach (string line in allLinesText)
-                {                    
-                    string[] info = line.Split(',');                                   
+                {
+                    string[] info = line.Split(',');
 
                     KWPerformanceReport keyword = new KWPerformanceReport();
                     keyword.channel = info[0];
@@ -245,11 +245,11 @@ namespace PerformReportCSV.Controllers
                     keyword.importedat = info[21];
                     keyword.filename = info[22];
 
-                   db.KWPerformanceReports.InsertOnSubmit(keyword);                   
+                    db.KWPerformanceReports.InsertOnSubmit(keyword);
                 } // end of foreach loop     
-                   db.SubmitChanges();
+                db.SubmitChanges();
             }  //end of using statement     
-        } 
+        }
         /// <summary>
         /// What is this method trying to do?
         /// Import new data from file and sort through the data a certain amount of lines at a time.
@@ -285,12 +285,12 @@ namespace PerformReportCSV.Controllers
             {
                 List<string> allLinesText = File.ReadAllLines(filename).
                     //Skip(1).    //Skip one line (Header)
-                    Take(100).                   
+                    Take(100).
                     ToList();
-                
-                int batchsize = 10000;               
 
-                for (int i = 0; i <= allLinesText.Count / batchsize; i++)                
+                int batchsize = 10000;
+
+                for (int i = 0; i <= allLinesText.Count / batchsize; i++)
                 {
                     // Variable batchitems is equal to the file list
                     // Skip ignores the specified items (i * batchsize) and starts after the last skipped item.
@@ -305,7 +305,7 @@ namespace PerformReportCSV.Controllers
                         if (!info[0].Equals("channel")) // If the first string not equal to the string channel
                         {
                             bool test = true;
-                            test = !info[0].Equals("channel");                            
+                            test = !info[0].Equals("channel");
 
                             KWPerformanceReport keyword = new KWPerformanceReport();
                             keyword.channel = info[0];
@@ -337,7 +337,7 @@ namespace PerformReportCSV.Controllers
 
 
                             db.KWPerformanceReports.InsertOnSubmit(keyword);
-                      } // end of if statement
+                        } // end of if statement
                     } // end of foreach loop 
                     db.SubmitChanges();
                 } // end of for loop
@@ -362,18 +362,18 @@ namespace PerformReportCSV.Controllers
 
             using (LINQtoSQLDataContext db = new LINQtoSQLDataContext())
             {
-                List<KWPerformanceReport> keywords = db.KWPerformanceReports.ToList(); //eager loading
+                List<KWPerformanceReportStaging> keywords = db.KWPerformanceReportStagings.ToList(); //eager loading
                 List<String> importedfiles = new List<string>();
-                foreach (KWPerformanceReport keyword in keywords)
-                {                    
-                    importedfiles.Add(keyword.filename);                                       
+                foreach (KWPerformanceReportStaging keyword in keywords)
+                {
+                    importedfiles.Add(keyword.filename);
                 }
                 //List<String> fileDifference = directoryfiles.Except(importedfiles).ToList();
-                
+
                 List<String> fileDifference = new List<string>();
                 foreach (string directoryfile in directoryfiles)
                 {
-                    foreach (string importedfile in importedfiles) 
+                    foreach (string importedfile in importedfiles)
                     {
                         // Does the string from the list equal a string from other list
                         if (directoryfile.Equals(importedfile))
@@ -391,9 +391,9 @@ namespace PerformReportCSV.Controllers
                             }
                         }
                     }
-                } 
+                }
                 return fileDifference; //where is this going? It goes to the method that calls this method.
-            }            
+            }
         }
         /// <summary>
         /// This method will import all files from directory that haven't been imported
@@ -407,7 +407,7 @@ namespace PerformReportCSV.Controllers
 
             foreach (string filename in filenamesTobeimported)
             {
-                CSVBatching(filename);
+                RawCSVBatching(filename);
             }
             return null;
         }
@@ -420,75 +420,202 @@ namespace PerformReportCSV.Controllers
         /// </summary>
         public static void Setup()
         {
-            string filename = (@"C:\Users\hmw\Documents\J.Pierce\JPStarterDesktop\kwreports\keywordperformancereport20160201.csv");
+            string filename = (@"C:\Users\hmw\Documents\J.Pierce\JPStarterDesktop\Rawkwreports\KeywordPerformanceNBS20140101.csv");
 
             using (LINQtoSQLDataContext dba = new LINQtoSQLDataContext())
             {
-                dba.ExecuteCommand("TRUNCATE TABLE KWPerformanceReports");
+                dba.ExecuteCommand("TRUNCATE TABLE staging.KWPerformanceReports");
             }
 
-            PerformanceReports.CSVBatching(filename);
+            PerformanceReports.RawCSVBatching(filename);
         }
-    }
-    public class DavidsPerformanceReports
-    {
-        public static String ImportUnimportedFiles(string directory)
+        public static void RawCSVBatching(string filename)
         {
-            using (var db = new LINQtoSQLDataContext())
             {
+                using (LINQtoSQLDataContext db = new LINQtoSQLDataContext())
+                {
+                    List<string> allLinesText = File.ReadAllLines(filename).
+                        Skip(1).    //Skip one line (Header)
+                        Take(100).
+                        ToList();
 
-                var all_files = Directory.GetFiles(directory).ToList();
+                    int batchsize = 10000;
 
-                var imported_files = db.KWPerformanceReports.
-                    Select(kwp => kwp.filename).
-                    Distinct().
-                    ToList();
+                    for (int i = 0; i <= allLinesText.Count / batchsize; i++)
+                    {
+                        var batchitems = allLinesText.Skip(i * batchsize).Take(batchsize).ToList();
 
-                var unimported_files = all_files.Except(imported_files).ToList();
-
-                var unimported_lines = unimported_files.
-                    SelectMany(unimported_file => File.ReadAllLines(unimported_file)).
-                    Where(line => !line.Split(',')[0].Equals("channel")).
-                    ToList();
-
-                var new_keywords = unimported_lines.
-                    Select(fl => fl.Split(',')).
-                    Where(fl => fl.Count() >= 23).
-                    Select(fl =>
-                        new KWPerformanceReport()
+                        foreach (string line in batchitems)
                         {
-                            channel = fl[0],
-                            day = fl[1],
-                            campaignid = fl[2],
-                            campaign = fl[3],
-                            campaignState = fl[4],
-                            adgroupid = fl[5],
-                            adGroup = fl[6],
-                            adGroupState = fl[7],
-                            keywordid = fl[8],
-                            keyword = fl[9],
-                            matchType = fl[10],
-                            firstpagecpc = fl[11],
-                            qualityscore = fl[12],
-                            maxcpc = fl[13],
-                            impressions = fl[14],
-                            searchimpressionshare = fl[15],
-                            clicks = fl[16],
-                            avgcpc = fl[17],
-                            cost = fl[18],
-                            avgposition = fl[19],
-                            finalurls = fl[20],
-                            importedat = fl[21],
-                            filename = fl[22]
-                        }).
-                    ToList();
 
-                db.KWPerformanceReports.InsertAllOnSubmit(new_keywords);
+                            string[] info = line.Split(',');
 
-                db.SubmitChanges();
-            }//end of using
+                            //If statement skips the first string in the loop, which is the header line.
 
-            return null;
+                            if (!info[0].Equals("Day")) // If the first string not equal to the string channel
+                            {
+
+                                bool test = true;
+                                test = !info[0].Equals("Day");
+
+                                KWPerformanceReportStaging keyword = new KWPerformanceReportStaging();
+                                keyword.Day = info[0];
+                                keyword.CampaignID = info[1];
+                                keyword.Campaign = info[2];
+                                keyword.Campaignstate = info[3];
+                                keyword.AdgroupID = info[4];
+                                keyword.Adgroup = info[5];
+                                keyword.adgroupstate = info[6];
+                                keyword.KeywordID = info[7];
+                                keyword.Keyword = info[8];
+                                keyword.Matchtype = info[9];
+                                keyword.FirstpageCPC = info[10];
+                                keyword.Qualityscore = info[11];
+                                keyword.Max_cpc = info[12];
+                                keyword.Impressions = info[13];
+                                keyword.SearchImpr_share = info[14];
+                                keyword.Clicks = info[15];
+                                keyword.Avg_CPC = info[16];
+                                keyword.Cost = info[17];
+                                keyword.Avg_position = info[18];
+                                keyword.FinalURL = info[19];
+                                keyword.importedat = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                                keyword.filename = filename;
+
+                                db.KWPerformanceReportStagings.InsertOnSubmit(keyword);
+                            } // end of if statement
+                        } // end of foreach loop 
+                        db.SubmitChanges();
+                    } // end of for loop
+                }  //end of using statement     
+            }
+        }
+        public static void RawCSVExport()
+        {
+            List<string> reports = new List<string>();
+            using (LINQtoSQLDataContext db = new LINQtoSQLDataContext())
+            {
+                List<KWPerformanceReportproduction> keywords = db.KWPerformanceReportproductions.ToList();
+
+                reports.Add
+                ("Day" +
+                ",CampaignID" +
+                ",Campaign" +
+                ",Campaignstate" +
+                ",AdgroupID" +
+                ",Adgroup" +
+                ",adgroupstate" +
+                ",KeywordID" +
+                ",Keyword" +
+                ",Matchtype" +
+                ",FirstpageCPC" +
+                ",Qualityscore" +
+                ",Maxcpc" +
+                ",Impressions" +
+                ",SearchImpressionShare" +
+                ",Clicks" +
+                ",AvgCPC" +
+                ",Cost" +
+                ",AVGposition" +
+                ",FinalURL" +
+                ",importedat" +
+                ",filename"
+                );
+
+                foreach (KWPerformanceReportproduction keyword in keywords)
+                {
+                    var arr1 = new List<String>
+                      {
+                        keyword.Day,
+                        keyword.CampaignID,
+                        keyword.Campaign,
+                        keyword.Campaignstate,
+                        keyword.AdgroupID,
+                        keyword.Adgroup,
+                        keyword.adgroupstate,
+                        keyword.KeywordID,
+                        keyword.Keyword,
+                        keyword.Matchtype,
+                        keyword.FirstpageCPC,
+                        keyword.Qualityscore,
+                        keyword.Maxcpc,
+                        keyword.Impressions,
+                        keyword.SearchImpressionShare,
+                        keyword.Clicks,
+                        keyword.AvgCPC,
+                        keyword.Cost,
+                        keyword.AVGposition,
+                        keyword.FinalURL,
+                        keyword.importedat,
+                        keyword.filename
+                      };
+                    reports.Add(String.Join(",", arr1));
+                }
+
+            }
+            File.WriteAllLines(@"C:\Users\hmw\Documents\J.Pierce\JPStarterDesktop\NewCSV\rawcsvKWPerformanceRproduction", reports);
+        }
+        public class DavidsPerformanceReports
+        {
+            public static String ImportUnimportedFiles(string directory)
+            {
+                using (var db = new LINQtoSQLDataContext())
+                {
+
+                    var all_files = Directory.GetFiles(directory).ToList();
+
+                    var imported_files = db.KWPerformanceReports.
+                        Select(kwp => kwp.filename).
+                        Distinct().
+                        ToList();
+
+                    var unimported_files = all_files.Except(imported_files).ToList();
+
+                    var unimported_lines = unimported_files.
+                        SelectMany(unimported_file => File.ReadAllLines(unimported_file)).
+                        Where(line => !line.Split(',')[0].Equals("channel")).
+                        ToList();
+
+                    var new_keywords = unimported_lines.
+                        Select(fl => fl.Split(',')).
+                        Where(fl => fl.Count() >= 23).
+                        Select(fl =>
+                            new KWPerformanceReport()
+                            {
+                                channel = fl[0],
+                                day = fl[1],
+                                campaignid = fl[2],
+                                campaign = fl[3],
+                                campaignState = fl[4],
+                                adgroupid = fl[5],
+                                adGroup = fl[6],
+                                adGroupState = fl[7],
+                                keywordid = fl[8],
+                                keyword = fl[9],
+                                matchType = fl[10],
+                                firstpagecpc = fl[11],
+                                qualityscore = fl[12],
+                                maxcpc = fl[13],
+                                impressions = fl[14],
+                                searchimpressionshare = fl[15],
+                                clicks = fl[16],
+                                avgcpc = fl[17],
+                                cost = fl[18],
+                                avgposition = fl[19],
+                                finalurls = fl[20],
+                                importedat = fl[21],
+                                filename = fl[22]
+                            }).
+                        ToList();
+
+                    db.KWPerformanceReports.InsertAllOnSubmit(new_keywords);
+
+                    db.SubmitChanges();
+                }//end of using
+
+                return null;
+            }
         }
     }
-} 
+}
+ 
